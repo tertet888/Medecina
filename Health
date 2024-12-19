@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Больница "КОГБУЗ" - Запись на прием</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #003d80;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        main {
+            padding: 20px;
+        }
+        .info-section {
+            display: none;
+            margin-bottom: 30px;
+        }
+        .info-section.active {
+            display: block;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #00408f;
+        }
+        footer {
+            background-color: #003d80;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.info-section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+
+            if (fullName && phone && appointmentDate) {
+                alert(`Вы записаны на прием: \nФИО: ${fullName}\nТелефон: ${phone}\nДата: ${appointmentDate}`);
+                document.getElementById('appointment-form').reset();
+            } else {
+                alert('Пожалуйста, заполните все поля.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('about'); // Show "О нас" by default
+            document.getElementById('appointment-form').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Больница "КОГБУЗ"</h1>
+    </header>
+    <nav>
+        <div>Навигация:</div>
+        <div>
+            <a onclick="showSection('about')">О нас</a>
+            <a onclick="showSection('services')">Услуги</a>
+            <a onclick="showSection('appointment')">Запись на прием</a>
+            <a onclick="showSection('contact')">Контакты</a>
+        </div>
+    </nav>
+    <main>
+        <section id="about" class="info-section">
+            <h2>О больнице</h2>
+            <p>Больница "КОГБУЗ" предоставляет широкий спектр медицинских услуг для взрослых и детей. Наши специалисты заботятся о вашем здоровье с использованием современных технологий.</p>
+        </section>
+        <section id="services" class="info-section">
+            <h2>Наши услуги</h2>
+            <ul>
+                <li>Терапевтические консультации</li>
+                <li>Диагностика</li>
+                <li>Педиатрия</li>
+                <li>Хирургические операции</li>
+            </ul>
+        </section>
+        <section id="appointment" class="info-section">
+            <h2>Запись на прием</h2>
+            <div class="form-container">
+                <form id="appointment-form">
+                    <div class="form-group">
+                        <label for="fullName">ФИО</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Введите ваше полное имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Номер телефона</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Введите ваш номер телефона" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentDate">Дата записи</label>
+                        <select id="appointmentDate" name="appointmentDate" required>
+                            <option value="">Выберите свободную дату</option>
+                            <option value="2024-12-20">20 декабря 2024</option>
+                            <option value="2024-12-21">21 декабря 2024</option>
+                            <option value="2024-12-22">22 декабря 2024</option>
+                            <option value="2024-12-23">23 декабря 2024</option>
+                            <option value="2024-12-24">24 декабря 2024</option>
+                            <option value="2024-12-25">25 декабря 2024</option>
+                            <option value="2024-12-26">26 декабря 2024</option>
+                            <option value="2024-12-27">27 декабря 2024</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Записаться</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section id="contact" class="info-section">
+            <h2>Контакты</h2>
+            <p>Адрес: ул. Больничная, 15, пгт. Кильмезь</p>
+            <p>Телефон: +7 (123) 456-78-90</p>
+            <p>Email: info@kogbuz.ru</p>
+			<p>Глав врач Ившин Константин Васильевич</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Больница "КОГБУЗ". Все права защищены.</p>
+    </footer>
+</body>
+</html>
